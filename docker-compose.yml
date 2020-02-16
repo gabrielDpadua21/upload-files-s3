@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  api-uploader:
+    build: .
+    command: yarn dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/app
+    links:
+      - db-uploader
+    depends_on:
+      - db-uploader
+  
+  db-uploader:
+    image: 'mongo'
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./.mongo:/data/db
+    ports:
+      - "27017:27017"
