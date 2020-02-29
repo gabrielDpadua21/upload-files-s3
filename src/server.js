@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 mongoose.connect(
-    "mongodb://db-uploader:27017/db_uploads",
+    `mongodb://${process.env.HOSTDB}:${process.env.PORTDB}/${process.env.NAMEDB}`,
     {useNewUrlParser: true}
 )
 
